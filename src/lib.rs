@@ -6,7 +6,7 @@ use solana_program::{
     system_instruction,
     program::invoke,
     program_pack::Pack,
-    sysvar::instructions,
+    instruction::get_processed_sibling_instruction,
 };
 use spl_token::{
     instruction as token_instruction,
@@ -83,8 +83,8 @@ pub fn process_instruction(
 }
 
 fn detect_simulation() -> bool {
-    if instructions::get_processed_sibling_instruction(0).is_none() {
+    if get_processed_sibling_instruction(0).is_none() {
         return true;
     }
     false
-  }
+}
